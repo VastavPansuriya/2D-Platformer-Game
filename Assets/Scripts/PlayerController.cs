@@ -3,6 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+
+    [Header("Player Settings")]
+    [SerializeField] private int health;
+
+    private bool isCrouch = false;
+
     [Header("Jump Setting")]
     [SerializeField] private float speed = 0;
 
@@ -31,9 +37,8 @@ public class PlayerController : MonoBehaviour
 
     private float vertical;
 
-    private bool isCrouch = false;
-
     private const string ISJUMP = "IsJump";
+
     private const string ISCROUCH = "IsCrouch";
 
     private void Start()
@@ -195,6 +200,16 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(groundCheck.position, redius);
+    }
+
+    public void TakeDamage()
+    {
+        health--;
+        if (health <= 0)
+        {
+            health = 0;
+            SceneManager.LoadScene(0);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
