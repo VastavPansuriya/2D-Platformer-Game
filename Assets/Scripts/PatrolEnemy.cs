@@ -19,31 +19,47 @@ public class PatrolEnemy : Enemy
     [Header("Enemy Rederer")]
     private SpriteRenderer spriteRenderer;
 
-    private float moveX = 1;
+    [SerializeField] private float moveX;
 
     private void Start()
     {
-        moveX = 1;
         enemyRb = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    public override void Update()
     {
         bool isGrounded = Physics2D.OverlapCircle(groundCheck.position, redius, groundLayer);
 
         if (!isGrounded)
         {
-            transform.Rotate(0, 180, 0);
-            Debug.Log("Continuas");
-            moveX *= -1;
+            Debug.Log("Work");
+
+            Debug.Log(moveX, this);
+            Flip_Enemy();
         }
+
     }
 
-    private void FixedUpdate()
+    public override void FixedUpdate()
     {
         enemyRb.velocity = new Vector2(moveX * speed * Time.fixedDeltaTime, enemyRb.velocity.y);
-    }
 
+    }
+    private void Flip_Enemy()
+    {
+        if (moveX > 0)
+        {
+            moveX = -1;
+
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        else
+        {
+            moveX = 1;
+
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+    }
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(groundCheck.position, redius);
