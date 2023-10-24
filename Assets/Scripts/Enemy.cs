@@ -11,4 +11,7 @@ public class Enemy : MonoBehaviour
             player.TakeDamage();
         }
     }
+
+    public virtual void Update() { }
+    public virtual void FixedUpdate() { }
 }

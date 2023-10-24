@@ -66,7 +66,13 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        horizontalMove = Input.GetAxisRaw("Horizontal");
+        if (GameLossData.isLoss)
+        {
+            playerRb.velocity = Vector2.zero;
+            return;
+        }
+
+        horizontalMove = Input.GetAxisRaw("Horizontal"); 
 
         FaceDir();
 
@@ -104,12 +110,18 @@ public class PlayerController : MonoBehaviour
     {
         if (playerRb.velocity.y < - 50)
         {
-            SceneManager.LoadScene(0);
+            GameLossData.isLoss = true;
         }
     }
 
     private void FixedUpdate()
     {
+        if (GameLossData.isLoss)
+        {
+            playerRb.velocity = Vector2.zero;
+            return;
+        }
+
         PlayerRun();
     }
 
@@ -205,10 +217,15 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage()
     {
         health--;
+        CheckIfDie();
+    }
+
+    private void CheckIfDie()
+    {
         if (health <= 0)
         {
             health = 0;
-            SceneManager.LoadScene(0);
+            GameLossData.isLoss = true;
         }
     }
 
