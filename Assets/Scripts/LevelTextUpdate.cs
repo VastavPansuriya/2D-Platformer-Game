@@ -12,6 +12,6 @@ public class LevelTextUpdate : MonoBehaviour
 
     private void Start()
     {
-        levelText_UI.text = "Level : " + (SceneManager.GetActiveScene().buildIndex + 1).ToString();
+        levelText_UI.text = "Level : " + (SceneManager.GetActiveScene().buildIndex).ToString();
     }
 }

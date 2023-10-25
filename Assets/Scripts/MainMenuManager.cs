@@ -5,9 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
+
+    private const string LEVEL_SELECT = "LevelSelect";
     public void Play()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(LEVEL_SELECT);
     }
 
     public void Quit()
