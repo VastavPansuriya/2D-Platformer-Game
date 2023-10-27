@@ -4,11 +4,10 @@ using UnityEngine.SceneManagement;
 public class SceneLoadManager : MonoBehaviour
 {
     [SerializeField] private int index = 0;
-<<<<<<< Updated upstream
 
     public void ChangeScene() {
         SceneManager.LoadScene(index);
-=======
+    }
     private void Start()
     {
         if (TryGetComponent(out Button button))
@@ -34,7 +33,6 @@ public class SceneLoadManager : MonoBehaviour
             default:
                 break;
         }
->>>>>>> Stashed changes
     }
 
     public void ChangeSceneDoor()
