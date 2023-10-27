@@ -29,7 +29,7 @@ public class LevelManager : MonoBehaviour
         SetLevelStatus(0, firstLevelStatus == LevelStatus.Lock ? LevelStatus.Unloack : firstLevelStatus); 
     }
 
-    public LevelStatus GetLevelStatus(int index)
+    public LevelStatus GetLevelStatus(int index) 
     {
         LevelStatus levelStatus = (LevelStatus)PlayerPrefs.GetInt(levels[index], 0);
         return levelStatus;

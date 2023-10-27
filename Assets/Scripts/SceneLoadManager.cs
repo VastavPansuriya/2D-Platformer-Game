@@ -5,20 +5,28 @@ public class SceneLoadManager : MonoBehaviour
 {
     [SerializeField] private int index = 0;
 
-    public void ChangeScene() {
+    public LevelStatus status;
+
+    public void ChangeScene()
+    {
         SceneManager.LoadScene(index);
+    }
+    private void Awake()
+    {
+        status = LevelManager.Instance.GetLevelStatus(index - 1);
+
+        if (TryGetComponent(out Button button))
+        {
+            button.onClick.AddListener(() => ButtonChangeSceneUI());
+        }
     }
     private void Start()
     {
-        if (TryGetComponent(out Button button))
-        {
-            button.onClick.AddListener(() => ButtonChangeScene());
-        }
     }
 
-    private void ButtonChangeScene()
+    private void ButtonChangeSceneUI()
     {
-        LevelStatus status = LevelManager.Instance.GetLevelStatus(index - 1);
+        status = LevelManager.Instance.GetLevelStatus(index - 1);
         switch (status)
         {
             case LevelStatus.Lock:
@@ -30,8 +38,6 @@ public class SceneLoadManager : MonoBehaviour
             case LevelStatus.Complete:
                 SceneManager.LoadScene(index);
                 break;
-            default:
-                break;
         }
     }
 
@@ -40,7 +46,7 @@ public class SceneLoadManager : MonoBehaviour
         LevelManager.Instance.SetLevelStatus(SceneManager.GetActiveScene().buildIndex, LevelStatus.Complete);
 
         LevelManager.Instance.SetLevelStatus(SceneManager.GetActiveScene().buildIndex + 1, LevelStatus.Unloack);
-            
-        SceneManager.LoadScene("LevelSelect");
+
+        GameWinManager.Instance.TriggerWin();
     }
 }
