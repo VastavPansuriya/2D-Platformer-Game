@@ -13,6 +13,7 @@ public class GameLossManager : MonoBehaviour
     private void Start()
     {
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        GameLossData.isLoss = false;
     }
 
     private void Update()
