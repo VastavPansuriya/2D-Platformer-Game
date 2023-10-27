@@ -163,7 +163,6 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space) || vertical > 0)
             {
-                Debug.Log("Space!");
                 if (IsGrounded())
                 {
                     Jump_Perform();

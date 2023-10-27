@@ -4,23 +4,43 @@ using UnityEngine.SceneManagement;
 public class SceneLoadManager : MonoBehaviour
 {
     [SerializeField] private int index = 0;
+
+    public void ChangeScene() {
+        SceneManager.LoadScene(index);
+    }
     private void Start()
     {
         if (TryGetComponent(out Button button))
         {
-            button.onClick.AddListener(() => SceneManager.LoadScene(button.gameObject.name));
+            button.onClick.AddListener(() => ButtonChangeScene());
         }
     }
 
-    public void ChangeScene()
+    private void ButtonChangeScene()
     {
-        int nextBuildIndex = SceneManager.GetActiveScene().buildIndex + 1;
-
-        Scene nextScene = SceneManager.GetSceneByBuildIndex(nextBuildIndex);
-
-        if (nextScene != null)
+        LevelStatus status = LevelManager.Instance.GetLevelStatus(index - 1);
+        switch (status)
         {
-            SceneManager.LoadScene(nextBuildIndex);
+            case LevelStatus.Lock:
+                Debug.Log("LevelIsLoacked");
+                break;
+            case LevelStatus.Unloack:
+                SceneManager.LoadScene(index);
+                break;
+            case LevelStatus.Complete:
+                SceneManager.LoadScene(index);
+                break;
+            default:
+                break;
         }
+    }
+
+    public void ChangeSceneDoor()
+    {
+        LevelManager.Instance.SetLevelStatus(SceneManager.GetActiveScene().buildIndex, LevelStatus.Complete);
+
+        LevelManager.Instance.SetLevelStatus(SceneManager.GetActiveScene().buildIndex + 1, LevelStatus.Unloack);
+            
+        SceneManager.LoadScene("LevelSelect");
     }
 }
