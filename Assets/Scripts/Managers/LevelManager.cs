@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour
 
     private const string fisrtLevel = "Level1";
 
-    [SerializeField] private string[] levels; 
+    [SerializeField] private string[] levels = new string[6];
 
     private void Awake()
     {
@@ -31,6 +31,7 @@ public class LevelManager : MonoBehaviour
 
     public LevelStatus GetLevelStatus(int index)
     {
+        Debug.Log(index);
         LevelStatus levelStatus = (LevelStatus)PlayerPrefs.GetInt(levels[index], 0);
         return levelStatus;
     }

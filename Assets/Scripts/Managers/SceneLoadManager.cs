@@ -5,6 +5,8 @@ public class SceneLoadManager : MonoBehaviour
 {
     [SerializeField] private int index = 0;
 
+    public LevelStatus status;
+
     public void ChangeScene() {
         SceneManager.LoadScene(index);
     }
@@ -15,10 +17,21 @@ public class SceneLoadManager : MonoBehaviour
             button.onClick.AddListener(() => ButtonChangeScene());
         }
     }
+    private void Awake()
+    {
+        status = LevelManager.Instance.GetLevelStatus(index - 1);
+
+        if (TryGetComponent(out Button button))
+        {
+            button.onClick.AddListener(() => ButtonChangeScene());
+        }
+    }
 
     private void ButtonChangeScene()
     {
         LevelStatus status = LevelManager.Instance.GetLevelStatus(index - 1);
+        status = LevelManager.Instance.GetLevelStatus(index - 1);
+        AudioManager.Instace.PlayEffect(SoundType.UIInteractSound);
         switch (status)
         {
             case LevelStatus.Lock:
@@ -37,10 +50,11 @@ public class SceneLoadManager : MonoBehaviour
 
     public void ChangeSceneDoor()
     {
-        LevelManager.Instance.SetLevelStatus(SceneManager.GetActiveScene().buildIndex, LevelStatus.Complete);
 
         LevelManager.Instance.SetLevelStatus(SceneManager.GetActiveScene().buildIndex + 1, LevelStatus.Unloack);
             
-        SceneManager.LoadScene("LevelSelect");
+        LevelManager.Instance.SetLevelStatus(SceneManager.GetActiveScene().buildIndex, LevelStatus.Unloack);
+
+        GameWinManager.Instance.TriggerWin();
     }
 }

@@ -13,7 +13,9 @@ public class Door : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other) 
     {
-        Debug.Log(other);
-        doorAnimation.enabled = true;
+        if (other.CompareTag("Player"))
+        {
+            doorAnimation.enabled = true;
+        }       
     }
 }

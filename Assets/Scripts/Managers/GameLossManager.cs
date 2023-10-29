@@ -10,6 +10,8 @@ public class GameLossManager : MonoBehaviour
     [Header("UI Settings")]
     [SerializeField] private GameObject lossPanel;
 
+    bool isLossPlayed = false;
+
     private void Start()
     {
         sceneIndex = SceneManager.GetActiveScene().buildIndex;
@@ -23,6 +25,11 @@ public class GameLossManager : MonoBehaviour
         }
         else
         {
+            if (!isLossPlayed)
+            {
+                AudioManager.Instace.PlayEffect(SoundType.Die);
+                isLossPlayed = true;
+            }
             lossPanel.SetActive(true);
         }
 

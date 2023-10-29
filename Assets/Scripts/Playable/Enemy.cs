@@ -8,7 +8,11 @@ public class Enemy : MonoBehaviour
     {
         if (other.TryGetComponent(out PlayerController player))
         {
+            AudioManager.Instace.PlayEffect(SoundType.Damage);
+
             player.TakeDamage();
+
+            PlayerHealthUI.Instace.UpdateHealthUI();
         }
     }
 

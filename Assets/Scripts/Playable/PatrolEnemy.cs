@@ -60,6 +60,13 @@ public class PatrolEnemy : Enemy
             transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
+
+    public void OnDie()
+    {
+        AudioManager.Instace.PlayEffect(SoundType.enemyDie);
+        Destroy(gameObject);
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(groundCheck.position, redius);

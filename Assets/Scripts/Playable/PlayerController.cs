@@ -1,11 +1,10 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
 
     [Header("Player Settings")]
-    [SerializeField] private int health;
+    public int health;
 
     private bool isCrouch = false;
 
@@ -17,6 +16,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int extraJump;
 
     private int remainedJump;
+
+    [Header("CheckEnemy Settings")]
+    [SerializeField] private Transform enemyCheck;
+
+    [SerializeField] private float enemyCheckRadius;
+
+    [SerializeField] private LayerMask enemyLayer;
 
     [Header("Ground Check Setting")]
     [SerializeField] private Transform groundCheck;
@@ -72,17 +78,27 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        horizontalMove = Input.GetAxisRaw("Horizontal"); 
+        horizontalMove = Input.GetAxisRaw("Horizontal");
 
         FaceDir();
 
         playerAnimator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+
+        Attack();
 
         Jump();
 
         Crouch();
 
         IsDead();
+    }
+
+    private void Attack()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            playerAnimator.SetTrigger("Attack");
+        }
     }
 
     private void FaceDir()
@@ -108,7 +124,7 @@ public class PlayerController : MonoBehaviour
 
     private void IsDead()
     {
-        if (playerRb.velocity.y < - 50)
+        if (playerRb.velocity.y < -50)
         {
             GameLossData.isLoss = true;
         }
@@ -124,6 +140,8 @@ public class PlayerController : MonoBehaviour
 
         PlayerRun();
     }
+
+
 
     private void PlayerRun()
     {
@@ -143,16 +161,19 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        bool isGrounded = IsGrounded();
+
         CheckIfJumpPress();
 
         //when player touch the ground extraJump will reset;
-        if (IsGrounded())
+        if (isGrounded)
         {
             remainedJump = extraJump;
         }
 
         void Jump_Perform()
         {
+            AudioManager.Instace.PlayEffect(SoundType.Jump);
             playerRb.velocity = Vector2.zero;
             playerRb.AddForce(jumpForce * Vector3.up, ForceMode2D.Impulse);
 
@@ -163,11 +184,11 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space) || vertical > 0)
             {
-                if (IsGrounded())
+                if (isGrounded)
                 {
                     Jump_Perform();
                 }
-                else if (!IsGrounded() && remainedJump > 0)
+                else if (!isGrounded && remainedJump > 0)
                 {
                     Jump_Perform();
                     remainedJump--;
@@ -208,9 +229,16 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetBool(animName, value);
     }
 
-    private void OnDrawGizmos()
+
+
+    public void CheckEnemy()
     {
-        Gizmos.DrawWireSphere(groundCheck.position, redius);
+        Collider2D enemy = Physics2D.OverlapCircle(enemyCheck.position, enemyCheckRadius, enemyLayer);
+        if (enemy != null)
+        {
+            enemy.enabled = false;
+            enemy.GetComponent<Animator>().Play("Death");
+        }
     }
 
     public void TakeDamage()
@@ -237,11 +265,18 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Key"))
         {
+            AudioManager.Instace.PlayEffect(SoundType.Key);
             scoreUpdate.IncreaseScore();
             if (other.TryGetComponent<Collactabe>(out Collactabe cm))
             {
                 cm.PlayCollected();
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(groundCheck.position, redius);
+        Gizmos.DrawWireSphere(enemyCheck.position, enemyCheckRadius);
     }
 }
