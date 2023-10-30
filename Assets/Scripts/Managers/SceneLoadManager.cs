@@ -50,9 +50,10 @@ public class SceneLoadManager : MonoBehaviour
     public void ChangeSceneDoor()
     {
 
-        LevelManager.Instance.SetLevelStatus(SceneManager.GetActiveScene().buildIndex + 1, LevelStatus.Unloack);
+        LevelManager.Instance.SetLevelStatus(SceneManager.GetActiveScene().buildIndex - 1, LevelStatus.Complete);
+
+        LevelManager.Instance.SetLevelStatus(SceneManager.GetActiveScene().buildIndex   , LevelStatus.Unloack);
             
-        LevelManager.Instance.SetLevelStatus(SceneManager.GetActiveScene().buildIndex, LevelStatus.Complete);
 
         GameWinManager.Instance.TriggerWin();
     }
