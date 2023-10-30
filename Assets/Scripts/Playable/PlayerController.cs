@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float speed = 0;
 
+    [SerializeField] private GameObject heartParticle;
+
     [Header("Jump Setting")]
     [SerializeField] private float jumpForce = 0;
 
@@ -45,6 +47,7 @@ public class PlayerController : MonoBehaviour
     private const string ISJUMP = "IsJump";
 
     private const string ISCROUCH = "IsCrouch";
+
 
     private void Start()
     {
@@ -107,7 +110,7 @@ public class PlayerController : MonoBehaviour
     {
         if (horizontalMove > 0)
         {
-            //sprite flip approach1 scale 
+            //sprite flip approach1 
             //transform.localScale = Vector3.one;
 
             //sprite flip approach2 flip value
@@ -245,6 +248,10 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage()
     {
+        GameObject heart = Instantiate(heartParticle, transform.position, transform.rotation);
+
+        Destroy(heart, 2f);
+
         health--;
         CheckIfDie();
     }

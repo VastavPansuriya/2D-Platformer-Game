@@ -21,7 +21,7 @@ public class AudioManager : MonoBehaviour,ISoundMusicChanger
     private void Awake()
     {
         InitInstance();
-        ChangeBGMusic(MusicType.levelMusic);
+        ChangeBGMusic(MusicType.lobbyMusic);
     }
 
     private void InitInstance()

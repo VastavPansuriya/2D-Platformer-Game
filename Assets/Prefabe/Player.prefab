@@ -404,6 +404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   speed: 300
+  heartParticle: {fileID: 100006, guid: bcaff8fc36e95584bb27cc3cf7c6cb14, type: 3}
   jumpForce: 15
   extraJump: 1
   enemyCheck: {fileID: 8274673246209856276}

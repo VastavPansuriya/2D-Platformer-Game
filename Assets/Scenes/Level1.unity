@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 905836594}
   - component: {fileID: 905836593}
   - component: {fileID: 905836592}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,14 +263,6 @@ CompositeCollider2D:
         Y: -20000000
       - X: 190000000
         Y: -20000000
-    - - X: -70000000
-        Y: -10000000
-      - X: -80000000
-        Y: -10000000
-      - X: -80000000
-        Y: -20000000
-      - X: -70000000
-        Y: -20000000
     - - X: 460000000
         Y: -20000000
       - X: 470000000
@@ -294,14 +286,6 @@ CompositeCollider2D:
       - X: 190000000
         Y: -30000000
       - X: 220000000
-        Y: -30000000
-    - - X: -60000000
-        Y: -20000000
-      - X: -70000000
-        Y: -20000000
-      - X: -70000000
-        Y: -30000000
-      - X: -60000000
         Y: -30000000
     - - X: 410000000
         Y: -30000000
@@ -371,18 +355,10 @@ CompositeCollider2D:
       - {x: 18.999971, y: -1}
       - {x: -6, y: -1.0000293}
       - {x: -5.999971, y: -2}
-    - - {x: -7.0000296, y: -2}
-      - {x: -7.0000296, y: -1}
-      - {x: -8, y: -1.0000293}
-      - {x: -7.9999704, y: -2}
     - - {x: 21.999971, y: -3}
       - {x: 21.999971, y: -2}
       - {x: 19, y: -2.0000293}
       - {x: 19.000029, y: -3}
-    - - {x: -6.000029, y: -3}
-      - {x: -6.000029, y: -2}
-      - {x: -7, y: -2.0000293}
-      - {x: -6.9999704, y: -3}
     - - {x: 40.999973, y: -18}
       - {x: 40.999973, y: -3}
       - {x: 27, y: -3.0000293}
@@ -34722,7 +34698,7 @@ PrefabInstance:
     - target: {fileID: 7844888469522514529, guid: d5d08ed3a01bf0c4a94f07d4f4175912,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.39
+      value: 18.22
       objectReference: {fileID: 0}
     - target: {fileID: 7844888469522514529, guid: d5d08ed3a01bf0c4a94f07d4f4175912,
         type: 3}
@@ -34773,6 +34749,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844888469700033475, guid: d5d08ed3a01bf0c4a94f07d4f4175912,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.03
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5d08ed3a01bf0c4a94f07d4f4175912, type: 3}
