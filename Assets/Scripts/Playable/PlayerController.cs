@@ -111,19 +111,19 @@ public class PlayerController : MonoBehaviour
         if (horizontalMove > 0)
         {
             //sprite flip approach1 
-            //transform.localScale = Vector3.one;
+            transform.localScale = Vector3.one;
 
             //sprite flip approach2 flip value
-            playerSprite_R.flipX = false;
+            //playerSprite_R.flipX = false;
         }
 
         if (horizontalMove < 0)
         {
             //sprite flip approach1 scale 
-            //transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-1, 1, 1);
 
             //sprite flip approach2 flip value
-            playerSprite_R.flipX = true;
+            //playerSprite_R.flipX = true;
         }
     }
 
