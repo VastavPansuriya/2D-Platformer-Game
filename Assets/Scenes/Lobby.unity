@@ -1548,6 +1548,8 @@ MonoBehaviour:
     effectClip: {fileID: 8300000, guid: d50f2e0626e662041aa8a2ff5f8ebcc6, type: 3}
   - effectType: 6
     effectClip: {fileID: 8300000, guid: 516604db9dbf00141b71b702c4fd79c4, type: 3}
+  - effectType: 7
+    effectClip: {fileID: 8300000, guid: 1b46739dd2e72b043937117be94011c8, type: 3}
   music_AudioSource: {fileID: 935644817}
   sounds_Music_Data:
   - effectType: 0
